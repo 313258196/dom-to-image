@@ -482,7 +482,14 @@
             }
 
             if(domtoimage.impl.options.proxy) {
-                url = `${domtoimage.impl.options.proxy}?${ (/^http[s]?\:\/\//).test(url) ? url :  (getRootUrl() + url)}`
+                if((/^https\:\/\//).test(url)){
+                    url = `${domtoimage.impl.options.proxy}/${url}`;
+                }else{
+                    if((/^http\:\/\//).test(url)){
+                    }else{
+                        url = getRootUrl() + url;
+                    }
+                }
             }
 
             return new Promise(function (resolve) {
